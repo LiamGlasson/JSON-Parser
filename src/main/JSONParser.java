@@ -7,7 +7,7 @@
     ╚═══════════════════════════╝   */
 package main;
 
-class JSONParser {
+public class JSONParser {
     public static void main(String[] args) {
         System.exit(0);
     }
