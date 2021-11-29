@@ -8,9 +8,9 @@
 package main.io;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -53,18 +53,42 @@ public class FileHandler {
         }
     }
 
-    public static void read(String directory) {
+    public static String toSingleLine(String directory) {
         try {
             File file = new File(directory);
             Scanner scanner = new Scanner(file);
+            StringBuilder json = new StringBuilder();
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                System.out.println(data);
+                json.append(data);
             }
             scanner.close();
+            return json.toString();
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException:");
             e.printStackTrace();
+            return "File Not Found";
+        }
+    }
+
+    public static String toMultipleLines(String directory) {
+        try {
+            File file = new File(directory);
+            Scanner scanner = new Scanner(file);
+            StringBuilder json = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
+                json.append(data);
+                if (scanner.hasNextLine()) {
+                    json.append("\n");
+                }
+            }
+            scanner.close();
+            return json.toString();
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException:");
+            e.printStackTrace();
+            return "File Not Found";
         }
     }
 }
