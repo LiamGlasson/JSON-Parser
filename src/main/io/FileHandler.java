@@ -14,81 +14,58 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FileHandler {
-    public static String getTempDirectory() {
-        return String.valueOf(System.getProperty("java.io.tmpdir"));
-    }
-
-    public static void create(String directory) {
+    public static void create(String fileName) {
         try {
-            File file = new File(directory);
+            File file = new File(fileName);
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());
             } else {
                 System.out.println("File already exists.");
             }
         } catch (IOException e) {
-            System.out.println("IOException:");
-            e.printStackTrace();
+            System.out.println("Failed to create the file.");
         }
     }
 
-    public static void delete(String directory) {
-        File file = new File(directory);
+    public static void delete(String fileName) {
+        File file = new File(fileName);
         if (file.delete()) {
-            System.out.println("File deleted: " + file.getName());
+            System.out.println("Deleted the file: " + file.getName());
         } else {
             System.out.println("Failed to delete the file.");
         }
     }
 
-    public static void write(String directory, String content) {
+    public static String read(String fileName) {
+        StringBuilder json = new StringBuilder();
         try {
-            FileWriter file = new FileWriter(directory);
+            File file = new File(fileName);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                json.append(scanner.nextLine());
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+        return json.toString();
+    }
+
+    public static void write(String fileName, String content) {
+        try {
+            FileWriter file = new FileWriter(fileName);
             file.write(content);
             file.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            System.out.println("IOException:");
-            e.printStackTrace();
+            System.out.println("Failed to write to the file.");
         }
     }
 
-    public static String toSingleLine(String directory) {
-        try {
-            File file = new File(directory);
-            Scanner scanner = new Scanner(file);
-            StringBuilder json = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                String data = scanner.nextLine();
-                json.append(data);
-            }
-            scanner.close();
-            return json.toString();
-        } catch (FileNotFoundException e) {
-            System.out.println("FileNotFoundException:");
-            e.printStackTrace();
-            return "File Not Found";
-        }
-    }
-
-    public static String toMultipleLines(String directory) {
-        try {
-            File file = new File(directory);
-            Scanner scanner = new Scanner(file);
-            StringBuilder json = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                String data = scanner.nextLine();
-                json.append(data);
-                if (scanner.hasNextLine()) {
-                    json.append("\n");
-                }
-            }
-            scanner.close();
-            return json.toString();
-        } catch (FileNotFoundException e) {
-            System.out.println("FileNotFoundException:");
-            e.printStackTrace();
-            return "File Not Found";
-        }
+    public static String toSingleLine(String json) {
+        json = json.replace(" ", "");
+        json = json.replace("\n", "");
+        json = json.replace("\t", "");
+        json = json.replace("\u0009", "");
+        return json;
     }
 }
