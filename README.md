@@ -9,7 +9,9 @@ There are no dependencies required to use this library.
 
 Usage
 ---
-This library is designed to be as simple as possible to use. Just include the JSONParser.java and FileHandler.java files in your project and you're good to go.
+ This library is designed to be as simple as possible to use.
+ 
+ Just include the JSONParser.java and FileHandler.java files in your project and you're good to go.
 
 Features
 ---
