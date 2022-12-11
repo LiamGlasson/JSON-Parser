@@ -8,7 +8,7 @@
 package test;
 
 import main.JSONParser;
-import main.io.FileHandler;
+import main.FileHandler;
 import org.junit.Test;
 
 import java.util.ArrayList;

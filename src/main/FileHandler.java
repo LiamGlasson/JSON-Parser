@@ -5,7 +5,7 @@
     ║ @framework:    JSON, Java ║
     ║   File Handling Utility   ║
     ╚═══════════════════════════╝   */
-package main.io;
+package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;

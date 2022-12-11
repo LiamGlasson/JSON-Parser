@@ -7,8 +7,6 @@
     ╚═══════════════════════════╝   */
 package main;
 
-import main.io.FileHandler;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -55,10 +53,15 @@ public class JSONParser {
     }
 
     public static void append(String directory, String key, String value) {
-        String json = FileHandler.toSingleLine(directory);
-        json = json.substring(0, json.length() - 1);
-        json += ", \"" + key + "\": \"" + value + "\"}";
-        FileHandler.write(directory, json);
+        if (FileHandler.read(directory).equals("")) {
+            FileHandler.write(directory, beautify("{\"" + key + "\":\"" + value + "\"}"));
+        } else {
+            String json = FileHandler.read(directory);
+            HashMap<String, String> map = toHashMap(json);
+            map.put(key, value);
+            String newJson = toJSONFromHashMap(map);
+            FileHandler.write(directory, newJson);
+        }
     }
 
     public static void remove(String directory, String key) {
