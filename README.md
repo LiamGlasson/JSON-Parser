@@ -1,18 +1,17 @@
 # JSON Parser
 JSON Parser
 A lightweight, native, JSON parsing solution written in Java.
-
+___
 Dependencies
 ---
-
 There are no dependencies required to use this library.
-
+___
 Usage
 ---
  This library is designed to be as simple as possible to use.
  
- Just include the *JSONParser.java* and *FileHandler.java* files in your project and you're good to go.
-
+ Just include the ***JSONParser.java*** and ***FileHandler.java*** files in your project and you're good to go.
+___
 Features
 ---
 * Create a new JSON file.
