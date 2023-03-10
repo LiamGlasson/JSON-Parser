@@ -1,4 +1,4 @@
-# JSON-Parser
+# JSON Parser
 JSON Parser
 A lightweight, native, JSON parsing solution written in Java.
 
